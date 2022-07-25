@@ -1,1 +1,1 @@
-# DI-Bootcamp-DataBase
+# DI-Bootcamp-DataBase-SQL
