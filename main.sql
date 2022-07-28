@@ -1,29 +1,47 @@
-CREATE TABLE movies(
-movie_id SERIAL,
-movie_title VARCHAR (50) NOT NULL,
-movie_story TEXT,
-actor_playing_id INTEGER,
-PRIMARY KEY (movie_id),
-FOREIGN KEY (actor_playing_id) REFERENCES actors (actor_id)
+create TABLE customer(
+customer_id SERIAL,
+first_name varchar(50) NOT NULL,
+last_name varchar(50) NOT NULL,
+PRIMARY key (customer_id)
 );
 
-CREATE TABLE producers(
-producer_id SERIAL PRIMARY KEY,
-producer_name text NOT NULL,
-movie_id int,
-FOREIGN KEY(movie_id) REFERENCES movies(movie_id)
+CREATE TABLE profil(
+pk_customer_id INTEGER NOT NULL,
+isLoggedIn DEFAULT false,
+PRIMARY KEY (pk_customer_id),
+constraint fk_customer_id foreign key (pk_customer_id) references customer_id (customer_id)
 );
 
-INSERT INTO movies (movie_title, movie_story, actor_playing_id) VALUES
-    ( 1,'Good Will Hunting', 
-    'Written by Affleck and Damon, the film follows 20-year-old South Boston janitor Will Hunting');
-INSERT INTO producers (producer_id,producer_name,movie_id) VALUES
-     (1,"Steven Spilberg",1);
+INSERT into customer(first_name, last_name) VALUES ('John','Doe');
+INSERT into customer(first_name, last_name) VALUES ('Jerome','Lalu');
+INSERT into customer(first_name, last_name) VALUES ('Lea','Rive');
+SELECT * from customer;
 
-SELECT * from movies;  
-SELECT * from producers;  
+-- insert into customer_profile 
+-- values
+-- (
+-- default,
+-- (select customer_id from customer where first_name = 'John'),
+-- true
+-- ),
+-- (
+-- default,
+-- (select customer_id from customer where first_name = 'Jerome'),
+-- default
+-- );
 
-SELECT movies.movie_id, movies.movie_title, movies.movie_story,movies.actor_playing_id
-FROM movies
-INNER JOIN producers
-ON movies.movie_id = producers.movie_id;
+-- select * from customer_profile;
+
+-- select first_name, isloggedin 
+-- from customer_profile
+-- inner join customer
+-- on customer_profile.customer_id = customer.customer_id;
+
+
+-- select first_name, isloggedin 
+-- from customer_profile
+-- right join customer
+-- on customer_profile.customer_id = customer.customer_id;
+
+
+
